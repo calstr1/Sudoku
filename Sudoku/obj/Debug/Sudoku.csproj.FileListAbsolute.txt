@@ -1,0 +1,6 @@
+C:\Users\Callum\documents\visual studio 2017\Projects\Sudoku\ConsoleApp1\obj\Debug\Sudoku.csprojResolveAssemblyReference.cache
+C:\Users\Callum\documents\visual studio 2017\Projects\Sudoku\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+C:\Users\Callum\documents\visual studio 2017\Projects\Sudoku\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+C:\Users\Callum\documents\visual studio 2017\Projects\Sudoku\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+C:\Users\Callum\documents\visual studio 2017\Projects\Sudoku\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+C:\Users\Callum\documents\visual studio 2017\Projects\Sudoku\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
