@@ -64,7 +64,7 @@ namespace Sudoku
         }
     }
 
-    public static class ArrayExt
+    public static class ArrayExt//provides a way to return a whole array at once from an array of arrays
     {
         public static T[] GetArr<T>(this T[,] array, int row)
         {
