@@ -75,8 +75,14 @@ namespace Sudoku
                 }
                 if (initial == Solved.zeroes.Count()) { Console.WriteLine("true"); break; }
             }
+            Console.WriteLine("Do you wish to solve the puzzle (y/n)?: ");
+            if(Console.ReadLine() == "y")
+            {
+                Game.Play();
+            }
+        
             Solved.PrintBoard();
-
+            
 
         Console.Read();
         }
