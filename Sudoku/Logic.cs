@@ -9,30 +9,27 @@ namespace Sudoku
 {
     class Logic
     {
-        public static List<int> zeroes = new List<int>();
-        public static List<int> options = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-
+        public static Board Solved = new Board();
         public static void Main(string[] args)
         {
             string line = Console.ReadLine();
             int[] input = line.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
-            Board.Fill(input);
-            Board.PrintBoard();
-
-
-            while (zeroes.Count() != 0)
+            Solved.Fill(input);
+            Solved.PrintBoard();
+            
+            while (Solved.zeroes.Count() != 0)
             {
-                int initial = zeroes.Count();
-                for (int i = 0; i < zeroes.Count(); i++)
+                int initial = Solved.zeroes.Count();
+                for (int i = 0; i < Solved.zeroes.Count(); i++)
                 {
-                    int boardIndex = zeroes.ElementAt(i);
+                    int boardIndex = Solved.zeroes.ElementAt(i);
                     List<int> currPoss = PossList(boardIndex);
-                    if (currPoss.Count() == 1 && zeroes.Contains(boardIndex))//if there is only one possible number for that square, enter it
+                    if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//if there is only one possible number for that square, enter it
                     {
                         int num = currPoss.ElementAt(0);
                         Board.board[boardIndex] = num;
                         Board.Reconstruct(boardIndex, num);
-                        zeroes.Remove(boardIndex);
+                        Solved.zeroes.Remove(boardIndex);
                     }
                     else
                     {
@@ -66,18 +63,18 @@ namespace Sudoku
                             int r1 = rowIndx[iter];
                             int c = colIndx[iter];
                             int s = squIndx[iter];
-                            if (zeroes.Contains(r1)) zRow.Add(r1);
-                            if (zeroes.Contains(c)) zCol.Add(c);
-                            if (zeroes.Contains(s)) zSqu.Add(s);
+                            if (Solved.zeroes.Contains(r1)) zRow.Add(r1);
+                            if (Solved.zeroes.Contains(c)) zCol.Add(c);
+                            if (Solved.zeroes.Contains(s)) zSqu.Add(s);
                         }
                         IndexLogic(zRow);//applies aforementioned logic through the IndexLogic function to the applicable row, column, and square
                         IndexLogic(zCol);
                         IndexLogic(zSqu);
                     }
                 }
-                if (initial == zeroes.Count()) { Console.WriteLine("true"); break; }
+                if (initial == Solved.zeroes.Count()) { Console.WriteLine("true"); break; }
             }
-            Board.PrintBoard();
+            Solved.PrintBoard();
         
 
 
@@ -110,12 +107,12 @@ namespace Sudoku
             {
                 int boardIndex = z.ElementAt(i);
                 currPoss = PossList(boardIndex);
-                if (currPoss.Count() == 1 && zeroes.Contains(boardIndex))
+                if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))
                 {
                     int num = currPoss.ElementAt(0);
                     Board.board[boardIndex] = num;
                     Board.Reconstruct(boardIndex, num);
-                    zeroes.Remove(boardIndex);
+                    Solved.zeroes.Remove(boardIndex);
                     //printBoard();
                     temp.Add(num);
                     noCheck.Add(indexesPoss.Count());
@@ -150,11 +147,11 @@ namespace Sudoku
                     for (int k = 0; k < indexesPoss.ElementAt(j).Count(); k++)
                     {
                         int val = indexesPoss.ElementAt(j).ElementAt(k);
-                        if (unique.Contains(val) && zeroes.Contains(z.ElementAt(j)))
+                        if (unique.Contains(val) && Solved.zeroes.Contains(z.ElementAt(j)))
                         {
                             Board.Reconstruct(z.ElementAt(j), val);
                             Board.board[z.ElementAt(j)] = val;
-                            zeroes.Remove(z.ElementAt(j));
+                            Solved.zeroes.Remove(z.ElementAt(j));
                         }
                     }
                 }

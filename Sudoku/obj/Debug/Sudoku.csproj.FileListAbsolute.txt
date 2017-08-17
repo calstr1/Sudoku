@@ -12,3 +12,9 @@ C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\ConsoleApp1\obj\
 C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\ConsoleApp1\obj\Debug\Sudoku.pdb
 C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\ConsoleApp1\bin\Debug\Sudoku.exe.CodeAnalysisLog.xml
 C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\ConsoleApp1\bin\Debug\Sudoku.exe.lastcodeanalysissucceeded
+C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\Sudoku\obj\Debug\Sudoku.csprojResolveAssemblyReference.cache
+C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\Sudoku\obj\Debug\Sudoku.exe
+C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\Sudoku\obj\Debug\Sudoku.pdb
+C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\Sudoku\bin\Debug\Sudoku.exe.config
+C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\Sudoku\bin\Debug\Sudoku.exe
+C:\Users\Callum\Documents\Visual Studio 2017\Projects\OcrSudoku\Sudoku\bin\Debug\Sudoku.pdb

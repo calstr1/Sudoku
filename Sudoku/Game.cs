@@ -8,9 +8,10 @@ namespace Sudoku
 {
     class Game
     {
+        public static Board unsolved = new Board();
         public static void Main(String[] args)
         {
-            
+
         }
     }
 }

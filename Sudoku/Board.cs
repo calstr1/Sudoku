@@ -14,19 +14,21 @@ namespace Sudoku
         public static int[,] columns = new int[9, 9];
         public static int[,] squares = new int[9, 9];
         public static int[] board = new int[81];
+        public List<int> zeroes = new List<int>();
+        public static List<int> options = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
-        public static void Fill(int[] input)//fills out the board
+        public void Fill(int[] input)//fills out the board
         {
             board = input;
             int num1 = input[0];
-            if (num1 == 0) Logic.zeroes.Add(0);
+            if (num1 == 0) zeroes.Add(0);
             columns[0, 0] = input[0];
             rows[0, 0] = input[0];
             squares[0, 0] = input[0];
             for (int i = 1; i < 81; i++)
             {
                 int num = input[i];
-                if (num == 0) Logic.zeroes.Add(i);
+                if (num == 0) zeroes.Add(i);
                 int row = i / 9;
                 int col = i % 9;
                 int squ = (3 * (row / 3)) + (col / 3);
@@ -47,7 +49,7 @@ namespace Sudoku
             squares[squ, col % 3 + (3 * (row % 3))] = num;
         }
 
-        public static void PrintBoard()//outputs the board in its current state
+        public void PrintBoard()//outputs the board in its current state
         {
             for (int i = 0; i < 9; i++)
             {
