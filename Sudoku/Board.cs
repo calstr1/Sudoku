@@ -10,10 +10,10 @@ namespace Sudoku
 {
     class Board
     {
-        public static int[,] rows = new int[9, 9];
-        public static int[,] columns = new int[9, 9];
-        public static int[,] squares = new int[9, 9];
-        public static int[] board = new int[81];
+        public int[,] rows = new int[9, 9];
+        public int[,] columns = new int[9, 9];
+        public int[,] squares = new int[9, 9];
+        public int[] board = new int[81];
         public List<int> zeroes = new List<int>();
         public static List<int> options = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
@@ -39,7 +39,7 @@ namespace Sudoku
             }
         }
 
-        public static void Reconstruct(int i, int num)//finalises changes and updates board
+        public void Reconstruct(int i, int num)//finalises changes and updates board
         {
             int row = i / 9;
             int col = i % 9;

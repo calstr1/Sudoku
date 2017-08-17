@@ -15,6 +15,7 @@ namespace Sudoku
             string line = Console.ReadLine();
             int[] input = line.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
             Solved.Fill(input);
+            Game.Unsolved.Fill(input);
             Solved.PrintBoard();
             
             while (Solved.zeroes.Count() != 0)
@@ -23,12 +24,12 @@ namespace Sudoku
                 for (int i = 0; i < Solved.zeroes.Count(); i++)
                 {
                     int boardIndex = Solved.zeroes.ElementAt(i);
-                    List<int> currPoss = PossList(boardIndex);
+                    List<int> currPoss = PossList(boardIndex, Solved);
                     if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//if there is only one possible number for that square, enter it
                     {
                         int num = currPoss.ElementAt(0);
-                        Board.board[boardIndex] = num;
-                        Board.Reconstruct(boardIndex, num);
+                        Solved.board[boardIndex] = num;
+                        Solved.Reconstruct(boardIndex, num);
                         Solved.zeroes.Remove(boardIndex);
                     }
                     else
@@ -75,21 +76,20 @@ namespace Sudoku
                 if (initial == Solved.zeroes.Count()) { Console.WriteLine("true"); break; }
             }
             Solved.PrintBoard();
-        
 
 
         Console.Read();
         }
 
-        public static List<int> PossList(int i)//returns a list with all the legal number options
+        public static List<int> PossList(int i, Board board)//returns a list with all the legal number options
         {
             int row = i / 9;
             int col = i % 9;
             int squ = (3 * (row / 3)) + (col / 3);
             List<int> rcs = new List<int>();
-            rcs.AddRange(Board.rows.GetArr(row));
-            rcs.AddRange(Board.columns.GetArr(col));
-            rcs.AddRange(Board.squares.GetArr(squ));
+            rcs.AddRange(board.rows.GetArr(row));
+            rcs.AddRange(board.columns.GetArr(col));
+            rcs.AddRange(board.squares.GetArr(squ));
             List<int> poss = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
             poss.RemoveAll(item => rcs.Contains(item));
             return poss;
@@ -106,12 +106,12 @@ namespace Sudoku
             for (int i = 0; i < z.Count(); i++)
             {
                 int boardIndex = z.ElementAt(i);
-                currPoss = PossList(boardIndex);
+                currPoss = PossList(boardIndex, Solved);
                 if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))
                 {
                     int num = currPoss.ElementAt(0);
-                    Board.board[boardIndex] = num;
-                    Board.Reconstruct(boardIndex, num);
+                    Solved.board[boardIndex] = num;
+                    Solved.Reconstruct(boardIndex, num);
                     Solved.zeroes.Remove(boardIndex);
                     //printBoard();
                     temp.Add(num);
@@ -149,8 +149,8 @@ namespace Sudoku
                         int val = indexesPoss.ElementAt(j).ElementAt(k);
                         if (unique.Contains(val) && Solved.zeroes.Contains(z.ElementAt(j)))
                         {
-                            Board.Reconstruct(z.ElementAt(j), val);
-                            Board.board[z.ElementAt(j)] = val;
+                            Solved.Reconstruct(z.ElementAt(j), val);
+                            Solved.board[z.ElementAt(j)] = val;
                             Solved.zeroes.Remove(z.ElementAt(j));
                         }
                     }
