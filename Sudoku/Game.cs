@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +27,7 @@ namespace Sudoku
                 {
                     int boardIndex = zeroes.ElementAt(i);
                     List<int> currPoss = PossList(boardIndex);
-                    if (currPoss.Count() == 1 && zeroes.Contains(boardIndex))
+                    if (currPoss.Count() == 1 && zeroes.Contains(boardIndex))//if there is only one possible number for that square, enter it
                     {
                         int num = currPoss.ElementAt(0);
                         Board.board[boardIndex] = num;
@@ -36,29 +36,32 @@ namespace Sudoku
                     }
                     else
                     {
-                        //return from zero list matching row, find unique possibility, implrement, repeat for squ and col
+                        /*return from zero list matching row, column, and square find unique possibility, implrement, repeat for squ and col
+                        *In other words, if a row needs 3 numbers, and one of those numbers only has one place it could go,
+                        * regardless of whether you record it as the only possible option or not, it must be the solution and is entered
+                        */
                         int row = boardIndex / 9;
                         int col = boardIndex % 9;
                         int squ = (3 * (row / 3)) + (col / 3);
                         int[] rowIndx = new int[9];
                         int[] colIndx = new int[9];
                         int[] squIndx = new int[9];
-                        for (int a = 0; a < 9; a++)
+                        for (int a = 0; a < 9; a++)//populates the index lists for the current row and column
                         {
                             rowIndx[a] = (row * 9) + a;
                             colIndx[a] = col + (9 * a);
                         }
-                        for (int c = 0; c < 3; c++)
+                        for (int c = 0; c < 3; c++)//populates the index lists for the current square
                         {
                             for (int d = 0; d < 3; d++)
                             {
                                 squIndx[(c * 3) + (d)] = (((squ - squ % 3) + c) * 9) + ((squ % 3) * 3) + d;
                             }
                         }
-                        List<int> zRow = new List<int>();
+                        List<int> zRow = new List<int>();//lists that will hold the indexes of all the empty or 'zero' values in the row column or square
                         List<int> zCol = new List<int>();
                         List<int> zSqu = new List<int>();
-                        for (int iter = 0; iter < 9; iter++)
+                        for (int iter = 0; iter < 9; iter++)//populates zero lists
                         {
                             int r1 = rowIndx[iter];
                             int c = colIndx[iter];
@@ -67,7 +70,7 @@ namespace Sudoku
                             if (zeroes.Contains(c)) zCol.Add(c);
                             if (zeroes.Contains(s)) zSqu.Add(s);
                         }
-                        IndexLogic(zRow);
+                        IndexLogic(zRow);//applies aforementioned logic through the IndexLogic function to the applicable row, column, and square
                         IndexLogic(zCol);
                         IndexLogic(zSqu);
                     }
@@ -81,7 +84,7 @@ namespace Sudoku
         Console.Read();
         }
 
-        public static List<int> PossList(int i)
+        public static List<int> PossList(int i)//returns a list with all the legal number options
         {
             int row = i / 9;
             int col = i % 9;
