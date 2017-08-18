@@ -14,10 +14,35 @@ namespace Sudoku
             while (Unsolved.board != Logic.Solved.board)
             {
                 Unsolved.PrintBoard();
-                int index = GetIndex();
+                int index = GetIndex();//gets a board array index for the selected box
                 Console.WriteLine("Enter a value for this box (1-9): ");
                 int value = GetOneNine();//gets a value for the box
+                Console.WriteLine(Legallity(index, value));
             }
+            Unsolved.PrintBoard();
+        }
+
+        public static string Legallity(int index, int value)//Checks whether the value is correct and if so implements
+        {
+            if (Unsolved.initialBoard[index] != 0)
+            {
+                if (Unsolved.zeroes.Contains(index))
+                {
+                    if(Logic.PossList(index, Unsolved).Contains(value))
+                    {
+                        if (value == Logic.Solved.board[index])
+                        {
+                            Unsolved.Reconstruct(index, value);
+                            Unsolved.PrintBoard();
+                            return "That value is correct";
+                        }
+                        else return "" + value + " is not the correct value.";
+                    }
+                    else return "There is a " + value + " in the same square, column, or row.";
+                }
+                else return "That box int empty";
+            }
+            else return "Original numbers cant be changed.";
         }
 
         public static int GetIndex()//converts a set of coordinates to a board index
