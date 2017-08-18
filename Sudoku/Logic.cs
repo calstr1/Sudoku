@@ -28,7 +28,7 @@ namespace Sudoku
                     if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//if there is only one possible number for that square, enter it
                     {
                         int num = currPoss.ElementAt(0);
-                        Solved.board[boardIndex] = num;
+                        //Solved.board[boardIndex] = num;
                         Solved.Reconstruct(boardIndex, num);
                         Solved.zeroes.Remove(boardIndex);
                     }
@@ -75,11 +75,11 @@ namespace Sudoku
                 }
                 if (initial == Solved.zeroes.Count()) { Console.WriteLine("true"); break; }
             }
-            Console.WriteLine("Do you wish to solve the puzzle (y/n)?: ");
+            /*Console.WriteLine("Do you wish to solve the puzzle (y/n)?: ");
             if(Console.ReadLine() == "y")
             {
                 Game.Play();
-            }
+            }*/
         
             Solved.PrintBoard();
             
@@ -116,7 +116,7 @@ namespace Sudoku
                 if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))
                 {
                     int num = currPoss.ElementAt(0);
-                    Solved.board[boardIndex] = num;
+                    //Solved.board[boardIndex] = num;
                     Solved.Reconstruct(boardIndex, num);
                     Solved.zeroes.Remove(boardIndex);
                     //printBoard();
@@ -156,7 +156,7 @@ namespace Sudoku
                         if (unique.Contains(val) && Solved.zeroes.Contains(z.ElementAt(j)))
                         {
                             Solved.Reconstruct(z.ElementAt(j), val);
-                            Solved.board[z.ElementAt(j)] = val;
+                            //Solved.board[z.ElementAt(j)] = val;
                             Solved.zeroes.Remove(z.ElementAt(j));
                         }
                     }
