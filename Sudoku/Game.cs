@@ -11,7 +11,7 @@ namespace Sudoku
         public static Board Unsolved = new Board();
         public static void Play()
         {
-            while (Unsolved.board != Logic.Solved.board)
+            while (Unsolved.zeroes.Count() != 0)
             {
                 Unsolved.PrintBoard();
                 int index = GetIndex();//gets a board array index for the selected box
@@ -20,6 +20,8 @@ namespace Sudoku
                 Console.WriteLine(Legallity(index, value));
             }
             Unsolved.PrintBoard();
+            Console.WriteLine("Done");
+            Console.ReadLine();
         }
 
         public static string Legallity(int index, int value)//Checks whether the value is correct and if so implements

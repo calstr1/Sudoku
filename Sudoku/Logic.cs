@@ -80,8 +80,7 @@ namespace Sudoku
             {
                 Game.Play();
             }
-        
-            Solved.PrintBoard();
+            else Solved.PrintBoard();
             
 
         Console.Read();
