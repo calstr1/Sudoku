@@ -44,6 +44,7 @@ namespace Sudoku
         public void Reconstruct(int i, int num)//finalises changes and updates board
         {
             board[i] = num;
+            zeroes.Remove(i);
             int row = i / 9;
             int col = i % 9;
             int squ = (3 * (row / 3)) + (col / 3);

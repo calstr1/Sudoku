@@ -25,12 +25,11 @@ namespace Sudoku
                 {
                     int boardIndex = Solved.zeroes.ElementAt(i);
                     List<int> currPoss = PossList(boardIndex, Solved);
-                    if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//if there is only one possible number for that square, enter it
+                    if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//if there is only one possible number for that box, enter it
                     {
                         int num = currPoss.ElementAt(0);
-                        //Solved.board[boardIndex] = num;
                         Solved.Reconstruct(boardIndex, num);
-                        Solved.zeroes.Remove(boardIndex);
+                        //Solved.zeroes.Remove(boardIndex);
                     }
                     else
                     {
@@ -75,7 +74,7 @@ namespace Sudoku
                 }
                 if (initial == Solved.zeroes.Count()) { Console.WriteLine("true"); break; }
             }
-            Console.WriteLine("Do you wish to solve the puzzle (y/n)?: ");
+            Console.WriteLine("Do you wish to solve the puzzle (y/n)?: ");//sets up to pass control over to Game to run the play
             if(Console.ReadLine() == "y")
             {
                 Game.Play();
@@ -91,16 +90,19 @@ namespace Sudoku
             int row = i / 9;
             int col = i % 9;
             int squ = (3 * (row / 3)) + (col / 3);
-            List<int> rcs = new List<int>();
+            List<int> rcs = new List<int>();//a list which contains all conflicting numbers for that index
             rcs.AddRange(board.rows.GetArr(row));
             rcs.AddRange(board.columns.GetArr(col));
             rcs.AddRange(board.squares.GetArr(squ));
             List<int> poss = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-            poss.RemoveAll(item => rcs.Contains(item));
+            poss.RemoveAll(item => rcs.Contains(item));//removes allconflicting numbers from the possibility list and returns it
             return poss;
         }
 
-        public static void IndexLogic(List<int> z)// 'z' is for zero
+        public static void IndexLogic(List<int> z)/* 'z' is for zero
+            for any row column or square if for all of the missing numbers in the array, any of them only occurs as a possibility once,
+            it gets implemented and inserted into the board
+            */
         {
             List<List<int>> indexesPoss = new List<List<int>>();
             List<int> remove = new List<int>();
@@ -108,17 +110,15 @@ namespace Sudoku
             List<int> temp = new List<int>();
             List<int> currPoss = new List<int>();
             List<int> noCheck = new List<int>();
-            for (int i = 0; i < z.Count(); i++)
+            for (int i = 0; i < z.Count(); i++)//if there is only one possible number for that box, enter it
             {
                 int boardIndex = z.ElementAt(i);
-                currPoss = PossList(boardIndex, Solved);
-                if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))
+                currPoss = PossList(boardIndex, Solved);//curr poss contains the current list of possibilities for a specific index
+                if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//checks if there is only one possibility for that index and double checks if index is empty
                 {
                     int num = currPoss.ElementAt(0);
-                    //Solved.board[boardIndex] = num;
                     Solved.Reconstruct(boardIndex, num);
-                    Solved.zeroes.Remove(boardIndex);
-                    //printBoard();
+                    //Solved.zeroes.Remove(boardIndex);
                     temp.Add(num);
                     noCheck.Add(indexesPoss.Count());
                     indexesPoss.Add(new List<int>());
@@ -155,8 +155,7 @@ namespace Sudoku
                         if (unique.Contains(val) && Solved.zeroes.Contains(z.ElementAt(j)))
                         {
                             Solved.Reconstruct(z.ElementAt(j), val);
-                            //Solved.board[z.ElementAt(j)] = val;
-                            Solved.zeroes.Remove(z.ElementAt(j));
+                            //Solved.zeroes.Remove(z.ElementAt(j));
                         }
                     }
                 }
