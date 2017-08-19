@@ -11,12 +11,12 @@ namespace Sudoku
         public static Board Unsolved = new Board();
         public static void Play()
         {
-            while (Unsolved.zeroes.Count() != 0)
+            while (Unsolved.zeroes.Count() != 0)//runs until there are no empty squares left in board
             {
                 Unsolved.PrintBoard();
-                int index = GetIndex();//gets a board array index for the selected box
-                Console.WriteLine("Enter a value for this box (1-9): ");
-                int value = GetOneNine();//gets a value for the box
+                int index = GetIndex();//gets a board array index for the selected cell
+                Console.WriteLine("Enter a value for this cell (1-9): ");
+                int value = GetOneNine();//gets a value for the cell
                 Console.WriteLine(Legallity(index, value));
             }
             Unsolved.PrintBoard();
@@ -26,13 +26,13 @@ namespace Sudoku
 
         public static string Legallity(int index, int value)//Checks whether the value is correct and if so implements
         {
-            if (Unsolved.initialBoard[index] != 0)
+            if (Unsolved.initialBoard[index] != 0)//Ensures a starting number isnt selected as they cant be changed
             {
-                if (Unsolved.zeroes.Contains(index))
+                if (Unsolved.zeroes.Contains(index))//checks if cell is empty
                 {
-                    if(Logic.PossList(index, Unsolved).Contains(value))
+                    if(Logic.PossList(index, Unsolved).Contains(value))//checks if there is a clash between a number in a row, column, or square, and the selected value
                     {
-                        if (value == Logic.Solved.board[index])
+                        if (value == Logic.Solved.board[index])//checks if value is correct
                         {
                             Unsolved.Reconstruct(index, value);
                             Unsolved.PrintBoard();
@@ -42,7 +42,7 @@ namespace Sudoku
                     }
                     else return "There is a " + value + " in the same square, column, or row.";
                 }
-                else return "That box int empty";
+                else return "That cell int empty";
             }
             else return "Original numbers cant be changed.";
         }

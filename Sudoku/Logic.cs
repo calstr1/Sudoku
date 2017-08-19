@@ -12,7 +12,8 @@ namespace Sudoku
         public static Board Solved = new Board();
         public static void Main(string[] args)
         {
-            string line = Console.ReadLine();
+            Console.WriteLine("Enter a sudoku board line by line with comma seperated numbers, and a zero for an empty square: ");
+            string line = Console.ReadLine();//collects user input
             int[] input = line.Split(',').Select(n => Convert.ToInt32(n)).ToArray();
             Solved.Fill(input);
             Game.Unsolved.Fill(input);
@@ -25,11 +26,10 @@ namespace Sudoku
                 {
                     int boardIndex = Solved.zeroes.ElementAt(i);
                     List<int> currPoss = PossList(boardIndex, Solved);
-                    if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//if there is only one possible number for that box, enter it
+                    if (currPoss.Count() == 1 && Solved.zeroes.Contains(boardIndex))//if there is only one possible number for that cell, enter it
                     {
                         int num = currPoss.ElementAt(0);
                         Solved.Reconstruct(boardIndex, num);
-                        //Solved.zeroes.Remove(boardIndex);
                     }
                     else
                     {
@@ -110,7 +110,7 @@ namespace Sudoku
             List<int> temp = new List<int>();
             List<int> currPoss = new List<int>();
             List<int> noCheck = new List<int>();
-            for (int i = 0; i < z.Count(); i++)//if there is only one possible number for that box, enter it
+            for (int i = 0; i < z.Count(); i++)//if there is only one possible number for that cell, enter it
             {
                 int boardIndex = z.ElementAt(i);
                 currPoss = PossList(boardIndex, Solved);//curr poss contains the current list of possibilities for a specific index
@@ -118,17 +118,16 @@ namespace Sudoku
                 {
                     int num = currPoss.ElementAt(0);
                     Solved.Reconstruct(boardIndex, num);
-                    //Solved.zeroes.Remove(boardIndex);
                     temp.Add(num);
-                    noCheck.Add(indexesPoss.Count());
+                    noCheck.Add(indexesPoss.Count());//populates a list of indexes which are no longer empty since zero check
                     indexesPoss.Add(new List<int>());
                 }
                 else indexesPoss.Add(currPoss);
 
             }
-            for (int j = 0; j < indexesPoss.Count(); j++)
+            for (int j = 0; j < indexesPoss.Count(); j++)//populates unique with each possible number for a cell in the array
             {
-                if (!noCheck.Contains(j))
+                if (!noCheck.Contains(j))//makes sure the cell hasnt been filled in since zero check
                 {
                     for (int k = 0; k < indexesPoss.ElementAt(j).Count(); k++)
                     {
@@ -144,8 +143,8 @@ namespace Sudoku
                     }
                 }
             }
-            unique.RemoveAll(item => temp.Contains(item));
-            for (int j = 0; j < indexesPoss.Count(); j++)
+            unique.RemoveAll(item => temp.Contains(item));//removes all numbers from unique that occurred multiple times
+            for (int j = 0; j < indexesPoss.Count(); j++)//fills in all cells that have a possibility in the unique list with that number
             {
                 if (!noCheck.Contains(j))
                 {
@@ -155,7 +154,6 @@ namespace Sudoku
                         if (unique.Contains(val) && Solved.zeroes.Contains(z.ElementAt(j)))
                         {
                             Solved.Reconstruct(z.ElementAt(j), val);
-                            //Solved.zeroes.Remove(z.ElementAt(j));
                         }
                     }
                 }
