@@ -31,13 +31,7 @@ namespace Sudoku
             {
                 int num = input[i];
                 if (num == 0) zeroes.Add(i);
-                int row = i / 9;
-                int col = i % 9;
-                int squ = (3 * (row / 3)) + (col / 3);
-                columns[col, row] = num; //swap these 3 lines for a function
-                rows[row, col] = num;
-                squares[squ, col % 3 + (3 * (row % 3))] = num;
-
+                Populate(i, num);
             }
         }
 
@@ -45,6 +39,11 @@ namespace Sudoku
         {
             board[i] = num;
             zeroes.Remove(i);
+            Populate(i, num);
+        }
+
+        public void Populate(int i, int num)//Populates appropriate row, column, and square array with the value
+        {
             int row = i / 9;
             int col = i % 9;
             int squ = (3 * (row / 3)) + (col / 3);
