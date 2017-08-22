@@ -8,6 +8,9 @@ using Sudoku;
 namespace Sudoku
 {
     class Logic
+        /*Contains all the methods to solve a sudoku, uses data structures in Board.
+         * Has methods to: receive a user's input, return all legal possibilities for a box, and apply logic to solve the puzzle, and call on the user to solve the puzzle through Game.
+         */
     {
         public static Board Solved = new Board();
         public static void Main(string[] args)

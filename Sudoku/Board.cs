@@ -9,6 +9,9 @@ using Sudoku;
 namespace Sudoku
 {
     class Board
+        /*Contains all the sudoku data in terms of a full board, rows, columns, and squares.
+         * Has methods to: initialise boards with an input provided, apply updates, and output the board.
+         */
     {
         public int[,] rows = new int[9, 9];
         public int[,] columns = new int[9, 9];
@@ -18,7 +21,7 @@ namespace Sudoku
         public List<int> zeroes = new List<int>();
         public static List<int> options = new List<int>(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
-        public void Fill(int[] input)//fills out the board
+        public void Fill(int[] input)//initialises/fills out the board
         {
             board = input;
             initialBoard = input;

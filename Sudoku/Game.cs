@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace Sudoku
 {
     class Game
+        /*Contains all the methods to play a sudoku, uses data structures in Board.
+         * Has methods to: play sudoku, check legallity of a value for a box, get user input for box and value selection, convert coordinates to an index.
+         */
     {
         public static Board Unsolved = new Board();
         public static void Play()
